@@ -1,4 +1,5 @@
 const puppeteer = require("puppeteer");
+const { del } = require("request");
 const challanges = require("./challanges");
 const challangesData = require('./challanges');
 const id = "xacor82723@bsmitao.com";
@@ -34,8 +35,15 @@ let tab;
     let createChallangeLink = await tab.evaluate((e) => e.getAttribute('href'), createChallengeBtn);
     createChallangeLink = 'https://www.hackerrank.com' + createChallangeLink;
 
-    for (let i = 0; i < challangesData.length; ++i) {
-        await addChallange(challangesData[i], browser, createChallangeLink);
+    // for (let i = 0; i < challangesData.length; ++i) {
+        // await addChallange(challangesData[i], browser, createChallangeLink);
+    // }
+
+    let challangeTags = await tab.$$('.backbone.block-center');
+    let allChallangeLinks = await tab.evaluate ((e)=> e.getAttribute('href'), challangeTags);
+
+    for (let i = 0; i < allChallangeLinks.length; ++i) {
+        await addModerator(allChallangeLinks[i], browser, createChallangeLink);
     }
 })();
 
@@ -60,7 +68,25 @@ async function addChallange(challenge, browser, createChallangeLink) {
     await newTab.type('#output_format-container .CodeMirror textarea', outputFormat);
     await newTab.type('#tags_tag', tags);
     await newTab.keyboard.press("Enter");
-    await newTab.click('.save-challenge.btn.btn-green', {delay: 500});
+    await newTab.click('.save-challenge.btn.btn-green', { delay: 500 });
     await newTab.waitForTimeout(3000);
     await newTab.close();
+}
+
+async function addModerator(challangeLink, browser, moderatorName) {
+    let newTab = browser.newPage();
+    await newTab.goto(challangeLink);
+
+    await newTab.waitForSelector('[data-tab="moderators"]');
+    await newTab.click('[data-tab="moderators"]', { delay: 500 });
+
+    await newTab.waitForSelector('#moderator');
+    await newTab.click('#moderator', { delay: 500 });
+
+    await newTab.type('#moderator', moderatorName);
+
+    await newTab.click('.btn.moderator-save', { delay: 500 });
+
+    await newTab.click('.save-challenge.btn.btn-green', { delay: 500 });
+    await newTab.waitForTimeout(2000);
 }
