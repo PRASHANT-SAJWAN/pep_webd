@@ -1,0 +1,106 @@
+[
+    {
+        "TeamName": "India",
+        "BatsmanName": "Shikhar Dhawan",
+        "Runs": 4,
+        "Balls": 12,
+        "Fours": 0,
+        "Sixes": 0
+    },
+    {
+        "TeamName": "India",
+        "BatsmanName": "KL Rahul",
+        "Runs": 1,
+        "Balls": 4,
+        "Fours": 0,
+        "Sixes": 0
+    },
+    {
+        "TeamName": "India",
+        "BatsmanName": "Virat Kohli (c)",
+        "Runs": 0,
+        "Balls": 5,
+        "Fours": 0,
+        "Sixes": 0
+    },
+    {
+        "TeamName": "India",
+        "BatsmanName": "Rishabh Pant †",
+        "Runs": 21,
+        "Balls": 23,
+        "Fours": 2,
+        "Sixes": 1
+    },
+    {
+        "TeamName": "India",
+        "BatsmanName": "Shreyas Iyer",
+        "Runs": 67,
+        "Balls": 48,
+        "Fours": 8,
+        "Sixes": 1
+    },
+    {
+        "TeamName": "India",
+        "BatsmanName": "Hardik Pandya",
+        "Runs": 19,
+        "Balls": 21,
+        "Fours": 1,
+        "Sixes": 1
+    },
+    {
+        "TeamName": "India",
+        "BatsmanName": "Shardul Thakur",
+        "Runs": 0,
+        "Balls": 1,
+        "Fours": 0,
+        "Sixes": 0
+    },
+    {
+        "TeamName": "India",
+        "BatsmanName": "Washington Sundar",
+        "Runs": 3,
+        "Balls": 3,
+        "Fours": 0,
+        "Sixes": 0
+    },
+    {
+        "TeamName": "India",
+        "BatsmanName": "Axar Patel",
+        "Runs": 7,
+        "Balls": 3,
+        "Fours": 1,
+        "Sixes": 0
+    },
+    {
+        "TeamName": "England",
+        "BatsmanName": "Jason Roy",
+        "Runs": 49,
+        "Balls": 32,
+        "Fours": 4,
+        "Sixes": 3
+    },
+    {
+        "TeamName": "England",
+        "BatsmanName": "Jos Buttler †",
+        "Runs": 28,
+        "Balls": 24,
+        "Fours": 2,
+        "Sixes": 1
+    },
+    {
+        "TeamName": "England",
+        "BatsmanName": "Dawid Malan",
+        "Runs": 24,
+        "Balls": 20,
+        "Fours": 2,
+        "Sixes": 1
+    },
+    {
+        "TeamName": "England",
+        "BatsmanName": "Jonny Bairstow",
+        "Runs": 26,
+        "Balls": 17,
+        "Fours": 1,
+        "Sixes": 2
+    }
+]
