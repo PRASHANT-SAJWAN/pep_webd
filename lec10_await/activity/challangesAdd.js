@@ -36,15 +36,24 @@ let tab;
     createChallangeLink = 'https://www.hackerrank.com' + createChallangeLink;
 
     // for (let i = 0; i < challangesData.length; ++i) {
-        // await addChallange(challangesData[i], browser, createChallangeLink);
+    //     await addChallange(challangesData[i], browser, createChallangeLink);
     // }
 
+    await tab.waitForSelector('.backbone.block-center');
     let challangeTags = await tab.$$('.backbone.block-center');
-    let allChallangeLinks = await tab.evaluate ((e)=> e.getAttribute('href'), challangeTags);
-
-    for (let i = 0; i < allChallangeLinks.length; ++i) {
-        await addModerator(allChallangeLinks[i], browser, createChallangeLink);
+    // console.log(challangeTags);
+    let allChallangeLinks = [];
+    for (let i = 0; i < challangeTags.length; ++i) {
+        let challangeLink = await tab.evaluate((e) => e.getAttribute('href'), challangeTags[i]);
+        allChallangeLinks.push (challangeLink);
     }
+    console.log(allChallangeLinks);
+    for (let i = 0; i < allChallangeLinks.length; ++i) {
+        let completeLink = 'https://www.hackerrank.com' + allChallangeLinks[i];
+        await addModerator(completeLink, browser, 'Ken__Kaneki');
+    }
+    await newTab.waitForTimeout(3000);
+    await tab.close();
 })();
 
 
@@ -74,8 +83,9 @@ async function addChallange(challenge, browser, createChallangeLink) {
 }
 
 async function addModerator(challangeLink, browser, moderatorName) {
-    let newTab = browser.newPage();
+    let newTab = await browser.newPage();
     await newTab.goto(challangeLink);
+    console.log(challangeLink);
 
     await newTab.waitForSelector('[data-tab="moderators"]');
     await newTab.click('[data-tab="moderators"]', { delay: 500 });
@@ -89,4 +99,5 @@ async function addModerator(challangeLink, browser, moderatorName) {
 
     await newTab.click('.save-challenge.btn.btn-green', { delay: 500 });
     await newTab.waitForTimeout(2000);
+    await newTab.close();
 }
