@@ -1,0 +1,32 @@
+[
+    {
+        "Bitcoin": "https://coinmarketcap.com/currencies/bitcoin/"
+    },
+    {
+        "Ethereum": "https://coinmarketcap.com/currencies/ethereum/"
+    },
+    {
+        "Binance Coin": "https://coinmarketcap.com/currencies/binance-coin/"
+    },
+    {
+        "XRP": "https://coinmarketcap.com/currencies/xrp/"
+    },
+    {
+        "Tether": "https://coinmarketcap.com/currencies/tether/"
+    },
+    {
+        "Cardano": "https://coinmarketcap.com/currencies/cardano/"
+    },
+    {
+        "Polkadot": "https://coinmarketcap.com/currencies/polkadot-new/"
+    },
+    {
+        "Uniswap": "https://coinmarketcap.com/currencies/uniswap/"
+    },
+    {
+        "Litecoin": "https://coinmarketcap.com/currencies/litecoin/"
+    },
+    {
+        "Chainlink": "https://coinmarketcap.com/currencies/chainlink/"
+    }
+]
