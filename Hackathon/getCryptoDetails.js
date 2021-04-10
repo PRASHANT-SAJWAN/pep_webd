@@ -1,12 +1,8 @@
-const puppeteer = require('puppeteer');
-const fs = require('fs');
-
-module.exports = (async (link, tab) => {
+module.exports = (async (link, browser, cryptoName) => {
+    let tab = await browser.newPage();
     await tab.goto(link);
-    let allTrTags = await tab.$$('.sc-AxhCb.hLddjF table tbody tr');
 
-    let cryptoNameTag = await tab.$('.sc-fzqBZW.bQqdJy.h1___3QSYG');
-    let cryptoName = await tab.evaluate((e) => e.textContent, cryptoNameTag);
+    let allTrTags = await tab.$$('.sc-AxhCb.hLddjF table tbody tr');
 
     let cryptoCurrentPriceInfo = await tab.evaluate((e) => e.textContent, allTrTags[0]);
 
@@ -53,7 +49,6 @@ module.exports = (async (link, tab) => {
     let cryptoInformation2 = await tab.evaluate((e) => e.textContent, cryptoInformationPTags[1]);
     let cryptoCompleteInformation = cryptoInformation1.concat('\n\t');
     cryptoCompleteInformation = cryptoCompleteInformation.concat(cryptoInformation2)
-    console.log(cryptoCompleteInformation);
 
     let obj = {
         'price': cryptoCurrentPriceInfo,
@@ -78,5 +73,15 @@ module.exports = (async (link, tab) => {
         'max supply': cryptoMaxSupply,
         'about': cryptoCompleteInformation
     };
+    let allBtnOptns = await tab.$$('.react-tabs__tab');
+    await allBtnOptns[4].click ();
+
+    await tab.waitForSelector('.chart___3dWkY');
+    const logo = await tab.$('.chart___3dWkY');
+    await tab.waitForTimeout (1200);
+    await logo.screenshot({
+        path: `${cryptoName}/last_week_graph.png`
+    });
+    tab.close();    
     return { [cryptoName]: obj };
 });

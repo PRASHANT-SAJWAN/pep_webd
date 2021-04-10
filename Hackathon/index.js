@@ -7,11 +7,10 @@ const homePage = 'https://coinmarketcap.com';
 (async () => {
     const browser = await puppeteer.launch({
         executablePath: 'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe',
-        headless: true,
+        headless: false,
         defaultViewport: null,
         args: ["--start-maximized"],
     });
-    // const tab = await browser.newPage();
     const pages = await browser.pages();
     let tab = pages[0];
 
@@ -22,9 +21,9 @@ const homePage = 'https://coinmarketcap.com';
 
     let allCryptoDetailPageLinks = [];
     let allCryptoName = [];
-    let data = [];
 
-    for (let i = 0; i < 1; ++i) {
+    let n = Math.min(5, allCryptoNameTags.length);
+    for (let i = 0; i < n; ++i) {
         let cryptoName = await tab.evaluate((e) => e.textContent, allCryptoNameTags[i]);
         let cryptoDetailPageLink = await tab.evaluate((e) => e.getAttribute('href'), allCryptoDetailPageLinksATag[i]);
 
@@ -34,13 +33,13 @@ const homePage = 'https://coinmarketcap.com';
         allCryptoDetailPageLinks.push(completeLink);
 
         // await getCryptoDetails (completeLink, tab);
-        let details = await getCryptoDetails (completeLink, tab);
-        data.push (details);
+        if (!(fs.existsSync(`./${cryptoName}`)))
+            fs.mkdirSync(`./${cryptoName}`);
+        let details = await getCryptoDetails (completeLink, browser, cryptoName);
+        fs.writeFileSync(`./${cryptoName}/data.json`, JSON.stringify(details));
+        // console.log("pushed in file !!! ");
     }
-    
-    // console.log(data);
-    // await fs.writeFileSync("./data.json", JSON.stringify(data));
-    // console.log("pushed in file !!! ");
-    console.log("End !!! ");
+    // console.log(" >>> pushed all data !!! ");
+    // console.log("End !!! ");
     browser.close();
 })();
