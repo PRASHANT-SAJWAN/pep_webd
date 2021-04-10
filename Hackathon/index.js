@@ -33,19 +33,14 @@ const homePage = 'https://coinmarketcap.com';
         allCryptoName.push(cryptoName);
         allCryptoDetailPageLinks.push(completeLink);
 
-        // data.push({
-        //     [allCryptoName[i]]: allCryptoDetailPageLinks[i],
-        // });
-        // let getDetails = await getCryptoDetails (completeLink, tab); can't do it liike this
-        await getCryptoDetails (completeLink, tab);
-        // data.push ({
-        //     [cryptoName[i]] : getDetails
-        // });
+        // await getCryptoDetails (completeLink, tab);
+        let details = await getCryptoDetails (completeLink, tab);
+        data.push (details);
     }
     
     // console.log(data);
     // await fs.writeFileSync("./data.json", JSON.stringify(data));
     // console.log("pushed in file !!! ");
     console.log("End !!! ");
-    tab.close();
+    browser.close();
 })();
