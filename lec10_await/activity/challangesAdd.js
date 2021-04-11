@@ -1,6 +1,5 @@
 const puppeteer = require("puppeteer");
 const { del } = require("request");
-const challanges = require("./challanges");
 const challangesData = require('./challanges');
 const id = "xacor82723@bsmitao.com";
 const pw = "123456789";
@@ -8,6 +7,7 @@ let tab;
 
 (async () => {
     const browser = await puppeteer.launch({
+        executablePath: 'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe',
         headless: false,
         defaultViewport: null,
         args: ["--start-maximized"],
@@ -45,7 +45,7 @@ let tab;
     let allChallangeLinks = [];
     for (let i = 0; i < challangeTags.length; ++i) {
         let challangeLink = await tab.evaluate((e) => e.getAttribute('href'), challangeTags[i]);
-        allChallangeLinks.push (challangeLink);
+        allChallangeLinks.push(challangeLink);
     }
     console.log(allChallangeLinks);
     for (let i = 0; i < allChallangeLinks.length; ++i) {
