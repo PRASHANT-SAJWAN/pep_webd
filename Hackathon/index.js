@@ -21,6 +21,7 @@ const homePage = 'https://coinmarketcap.com';
 
     let allCryptoDetailPageLinks = [];
     let allCryptoName = [];
+    let allData = [];
 
     let n = Math.min(5, allCryptoNameTags.length);
     for (let i = 0; i < n; ++i) {
@@ -38,7 +39,9 @@ const homePage = 'https://coinmarketcap.com';
         let details = await getCryptoDetails (completeLink, browser, cryptoName);
         fs.writeFileSync(`./${cryptoName}/data.json`, JSON.stringify(details));
         // console.log("pushed in file !!! ");
+        allData.push (details);
     }
+    fs.writeFileSync(`./data.json`, JSON.stringify(allData));
     // console.log(" >>> pushed all data !!! ");
     // console.log("End !!! ");
     browser.close();

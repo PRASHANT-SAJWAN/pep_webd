@@ -1,32 +1,127 @@
 [
     {
-        "Bitcoin": "https://coinmarketcap.com/currencies/bitcoin/"
+        "Bitcoin": {
+            "price": "Bitcoin Price$60,408.46",
+            "precentage change": "Price Change24h$1,768.033.02%",
+            "low / high": "24h Low / 24h High$58,465.55 /$61,276.67",
+            "trading volume": "Trading Volume24h$57,940,081,491.4223.38%",
+            "volume by market capacity": "Volume / Market Cap0.05135",
+            "market dominance": "Market Dominance54.75%",
+            "market rank": "Market Rank#1",
+            "market capacity": "Market Cap$1,128,390,692,371.023.02%",
+            "fully diluted market capacity": "Fully Diluted Market Cap$1,268,577,575,761.013.02%",
+            "yesterday low / high": "Yesterday's Low / High$58,038.71 /$61,276.67",
+            "open / close": "Yesterday's Open / Close$58,253.78 /$59,793.24",
+            "yesterday change": "Yesterday's Change2.64%",
+            "yesterday volume": "Yesterday's Volume$58,238,470,525.26",
+            "week low / high": "7d Low / 7d High$55,604.02 /$61,276.67",
+            "month low / high": "All Time HighMar 13, 2021 (a month ago)$61,683.862.07%",
+            "all time low": "All Time LowJul 05, 2013 (8 years ago)$65.5392090.05%",
+            "bitcoinROI": "Bitcoin ROI44554.66%",
+            "circulating supply": "Circulating Supply18,679,350 BTC",
+            "total supply": "Total Supply18,679,350 BTC",
+            "max supply": "Max Supply21,000,000 BTC",
+            "about": "The live Bitcoin price today is $60,408.46 USD with a 24-hour trading volume of $57,940,081,491 USD. Bitcoin is up 3.02% in the last 24 hours. The current CoinMarketCap ranking is #1, with a live market cap of $1,128,390,692,371 USD. It has a circulating supply of 18,679,350 BTC coins and a max. supply of 21,000,000 BTC coins.\n\tThe top exchanges for trading in Bitcoin are currently Binance, Huobi Global, OKEx, Bybit,  and Upbit. You can find others listed on our crypto exchanges page."
+        }
     },
     {
-        "Ethereum": "https://coinmarketcap.com/currencies/ethereum/"
+        "Ethereum": {
+            "price": "Ethereum Price$2,152.84",
+            "precentage change": "Price Change24h$55.332.64%",
+            "low / high": "24h Low / 24h High$2,088.14 /$2,197.00",
+            "trading volume": "Trading Volume24h$24,102,729,737.6218.99%",
+            "volume by market capacity": "Volume / Market Cap0.097",
+            "market dominance": "Market Dominance12.06%",
+            "market rank": "Market Rank#2",
+            "market capacity": "Market Cap$248,478,716,486.472.65%",
+            "fully diluted market capacity": "Fully Diluted Market Cap$248,478,716,486.472.64%",
+            "yesterday low / high": "Yesterday's Low / High$2,062.79 /$2,197.00",
+            "open / close": "Yesterday's Open / Close$2,071.11 /$2,135.94",
+            "yesterday change": "Yesterday's Change3.13%",
+            "yesterday volume": "Yesterday's Volume$24,986,243,611.44",
+            "week low / high": "7d Low / 7d High$1,945.44 /$2,197.00",
+            "month low / high": "All Time HighApr 10, 2021 (a day ago)$2,197.002.01%",
+            "all time low": "All Time LowOct 21, 2015 (5 years ago)$0.4209511388.92%",
+            "bitcoinROI": "Ethereum ROI75932.42%",
+            "circulating supply": "Circulating Supply115,418,951 ETH",
+            "total supply": "Total Supply115,418,951 ETH",
+            "max supply": "Max SupplyNo Data",
+            "about": "The live Ethereum price today is $2,152.84 USD with a 24-hour trading volume of $24,102,729,738 USD. Ethereum is up 2.64% in the last 24 hours. The current CoinMarketCap ranking is #2, with a live market cap of $248,478,716,486 USD. It has a circulating supply of 115,418,951 ETH coins and the max. supply is not available.\n\tThe top exchanges for trading in Ethereum are currently Binance, Huobi Global, OKEx, Bybit,  and Upbit. You can find others listed on our crypto exchanges page."
+        }
     },
     {
-        "Binance Coin": "https://coinmarketcap.com/currencies/binance-coin/"
+        "Binance Coin": {
+            "price": "Binance Coin Price$463.84",
+            "precentage change": "Price Change24h$-13.552.84%",
+            "low / high": "24h Low / 24h High$454.94 /$472.61",
+            "trading volume": "Trading Volume24h$5,421,516,515.611.69%",
+            "volume by market capacity": "Volume / Market Cap0.07577",
+            "market dominance": "Market Dominance3.47%",
+            "market rank": "Market Rank#3",
+            "market capacity": "Market Cap$71,547,873,946.484.10%",
+            "fully diluted market capacity": "Fully Diluted Market Cap$78,955,790,545.824.10%",
+            "yesterday low / high": "Yesterday's Low / High$451.36 /$487.28",
+            "open / close": "Yesterday's Open / Close$454.34 /$472.56",
+            "yesterday change": "Yesterday's Change4.01%",
+            "yesterday volume": "Yesterday's Volume$6,160,670,396.68",
+            "week low / high": "7d Low / 7d High$339.46 /$472.61",
+            "month low / high": "All Time HighApr 10, 2021 (17 hours ago)$487.284.98%",
+            "all time low": "All Time LowAug 01, 2017 (4 years ago)$0.09611481637.21%",
+            "bitcoinROI": "Binance Coin ROI401794.73%",
+            "circulating supply": "Circulating Supply154,532,785 BNB",
+            "total supply": "Total Supply170,532,785 BNB",
+            "max supply": "Max Supply170,532,785 BNB",
+            "about": "The live Binance Coin price today is $462.99 USD with a 24-hour trading volume of $5,421,516,516 USD. Binance Coin is down 4.10% in the last 24 hours. The current CoinMarketCap ranking is #3, with a live market cap of $71,547,873,946 USD. It has a circulating supply of 154,532,785 BNB coins and a max. supply of 170,532,785 BNB coins.\n\tThe top exchanges for trading in Binance Coin are currently Binance, CoinTiger, FTX, BitZ,  and HBTC. You can find others listed on our crypto exchanges page."
+        }
     },
     {
-        "XRP": "https://coinmarketcap.com/currencies/xrp/"
+        "XRP": {
+            "price": "XRP Price$1.44",
+            "precentage change": "Price Change24h$0.400138.49%",
+            "low / high": "24h Low / 24h High$1.05 /$1.49",
+            "trading volume": "Trading Volume24h$29,404,416,018.50192.74%",
+            "volume by market capacity": "Volume / Market Cap0.4499",
+            "market dominance": "Market Dominance3.17%",
+            "market rank": "Market Rank#4",
+            "market capacity": "Market Cap$65,353,027,228.5038.49%",
+            "fully diluted market capacity": "Fully Diluted Market Cap$143,936,626,740.0538.49%",
+            "yesterday low / high": "Yesterday's Low / High$1.01 /$1.39",
+            "open / close": "Yesterday's Open / Close$1.02 /$1.37",
+            "yesterday change": "Yesterday's Change34.71%",
+            "yesterday volume": "Yesterday's Volume$25,547,794,935.11",
+            "week low / high": "7d Low / 7d High$0.634 /$1.49",
+            "month low / high": "All Time HighJan 04, 2018 (3 years ago)$3.8462.54%",
+            "all time low": "All Time LowJul 07, 2014 (7 years ago)$0.00280251262.83%",
+            "bitcoinROI": "XRP ROI24495.13%",
+            "circulating supply": "Circulating Supply45,404,028,640 XRP",
+            "total supply": "Total Supply99,990,831,162 XRP",
+            "max supply": "Max Supply100,000,000,000 XRP",
+            "about": "The live XRP price today is $1.44 USD with a 24-hour trading volume of $29,404,416,018 USD. XRP is up 38.49% in the last 24 hours. The current CoinMarketCap ranking is #4, with a live market cap of $65,353,027,229 USD. It has a circulating supply of 45,404,028,640 XRP coins and a max. supply of 100,000,000,000 XRP coins.\n\tThe top exchanges for trading in XRP are currently Binance, Huobi Global, OKEx, Bybit,  and Upbit. You can find others listed on our crypto exchanges page."
+        }
     },
     {
-        "Tether": "https://coinmarketcap.com/currencies/tether/"
-    },
-    {
-        "Cardano": "https://coinmarketcap.com/currencies/cardano/"
-    },
-    {
-        "Polkadot": "https://coinmarketcap.com/currencies/polkadot-new/"
-    },
-    {
-        "Uniswap": "https://coinmarketcap.com/currencies/uniswap/"
-    },
-    {
-        "Litecoin": "https://coinmarketcap.com/currencies/litecoin/"
-    },
-    {
-        "Chainlink": "https://coinmarketcap.com/currencies/chainlink/"
+        "Tether": {
+            "price": "Tether Price$1.00",
+            "precentage change": "Price Change24h$0.00052350.05%",
+            "low / high": "24h Low / 24h High$0.9974 /$1.00",
+            "trading volume": "Trading Volume24h$113,549,021,345.4028.71%",
+            "volume by market capacity": "Volume / Market Cap2.55",
+            "market dominance": "Market Dominance2.16%",
+            "market rank": "Market Rank#5",
+            "market capacity": "Market Cap$44,492,261,420.030.16%",
+            "fully diluted market capacity": "Fully Diluted Market Cap$45,915,784,493.770.05%",
+            "yesterday low / high": "Yesterday's Low / High$0.9974 /$1.00",
+            "open / close": "Yesterday's Open / Close$1.00 /$1.00",
+            "yesterday change": "Yesterday's Change0.06%",
+            "yesterday volume": "Yesterday's Volume$111,560,200,797.96",
+            "week low / high": "7d Low / 7d High$0.9974 /$1.01",
+            "month low / high": "All Time HighMay 27, 2017 (4 years ago)$1.2117.22%",
+            "all time low": "All Time LowMar 13, 2020 (a year ago)$0.899511.34%",
+            "bitcoinROI": "Tether ROI0.15%",
+            "circulating supply": "Circulating Supply44,424,922,421 USDT",
+            "total supply": "Total Supply45,846,290,994 USDT",
+            "max supply": "Max SupplyNo Data",
+            "about": "The live Tether price today is $1.00 USD with a 24-hour trading volume of $113,549,021,345 USD. Tether is up 0.05% in the last 24 hours. The current CoinMarketCap ranking is #5, with a live market cap of $44,492,261,420 USD. It has a circulating supply of 44,424,922,421 USDT coins and the max. supply is not available.\n\tThe top exchanges for trading in Tether are currently Binance, Huobi Global, OKEx, ZBG,  and FTX. You can find others listed on our crypto exchanges page."
+        }
     }
 ]
