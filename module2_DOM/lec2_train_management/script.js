@@ -5,6 +5,7 @@ let filterCodes = {
     black: "#34495e",
 };
 
+
 // this is the default filter selected for tickets !!!
 let selectedFilter = "black";
 
@@ -18,14 +19,15 @@ function loadTickets() {
         ticketContainer.innerHTML = "";
         let allTickets = JSON.parse(localStorage.getItem("allTickets"));
         for (let i = 0; i < allTickets.length; i++) {
+            // object destructuring !!!
             let { ticketId, ticketFilter, ticketContent } = allTickets[i];
 
             let ticketDiv = document.createElement("div");
             ticketDiv.classList.add("ticket");
             // set the html of the ticket wala div !!
             ticketDiv.innerHTML = ` <div class="ticket-filter ${ticketFilter}"></div>
-                                    <div class="ticket-id">#${ticketId}</div>
-                                    <div class="ticket-content">${ticketContent}</div>`;
+        <div class="ticket-id">#${ticketId}</div>
+        <div class="ticket-content">${ticketContent}</div>`;
 
             // append the ticket on the UI !!!!
             ticketContainer.append(ticketDiv);
@@ -33,6 +35,9 @@ function loadTickets() {
     }
 }
 loadTickets();
+
+
+
 
 
 
@@ -93,7 +98,7 @@ function chooseModalFilter(e) {
     // set selected filter as the now choose filter !!!
     selectedFilter = selectedModalFilter;
     // remove active filter class
-    document.querySelector(".active-filter").classList.remove("active-filter");
+    document.querySelector(".modal-filter.active-filter").classList.remove("active-filter");
     // add active filter class on now selected filter 
     e.target.classList.add("active-filter");
 }
@@ -118,30 +123,39 @@ function addTicket(e) {
 
         // ticket has been appended on the document !!!
         // false , null , undefined , 0 , "" , NaN
+        if (!localStorage.getItem('allTickets')) {
+            // first time ticket aayegi
+            let allTickets = [];
 
-        // first time ticket aayegi
-        let allTickets = [];
-        if (localStorage.getItem('allTickets')) {
+            let ticketObject = {};
+            ticketObject.ticketId = ticketId;
+            ticketObject.ticketFilter = selectedFilter;
+            ticketObject.ticketContent = modalText;
+            allTickets.push(ticketObject);
+
+            localStorage.setItem("allTickets", JSON.stringify(allTickets));
+        }
+        else {
             // already tickets hain !!!
-            allTickets = JSON.parse(localStorage.getItem("allTickets"));
+            let allTickets = JSON.parse(localStorage.getItem("allTickets"));
+            let ticketObject = {};
+            ticketObject.ticketId = ticketId;
+            ticketObject.ticketFilter = selectedFilter;
+            ticketObject.ticketContent = modalText;
+            allTickets.push(ticketObject);
+
+            localStorage.setItem("allTickets", JSON.stringify(allTickets));
         }
 
-        let ticketObject = {};
-        ticketObject.ticketId = ticketId;
-        ticketObject.ticketFilter = selectedFilter;
-        ticketObject.ticketContent = modalText;
-        allTickets.push(ticketObject);
-
-        localStorage.setItem("allTickets", JSON.stringify(allTickets));
 
         // again set by default filter as black !!!
         selectedFilter = "black";
     }
 }
 function clearModalTextBox(e) {
-    if (e.target.getAttribute("data-typed") == "true")
+    if (e.target.getAttribute("data-typed") == "true") {
         return;
-
+    }
     e.target.innerHTML = "";
     e.target.setAttribute("data-typed", "true");
 }
@@ -149,6 +163,8 @@ function clearModalTextBox(e) {
 for (let i = 0; i < allFilters.length; i++) {
     allFilters[i].addEventListener("click", chooseFilter);
 }
+
+
 function chooseFilter(e) {
     if (e.target.classList.contains("active-filter")) {
         // if active filter already present !!
@@ -156,38 +172,42 @@ function chooseFilter(e) {
         loadTickets();
         return;
     }
-    let filterBtn = document.querySelector('.filter.active-filter');
-    if (filterBtn)
-        filterBtn.classList.remove('.filter.active-filter');
-    e.target.classList.add('active-filter');
-    let filter = e.target.classList[1];
-    loadSelectedTickets(filter);
-    // let filterCode = filterCodes[filter];
-    // ticketContainer.style.background = filterCode;
+
+    // remove active filter from already selected filter
+    if (document.querySelector(".filter.active-filter")) {
+        document.querySelector(".filter.active-filter").classList.remove("active-filter");
+    }
+    // add active filter on now selected filter !!
+    e.target.classList.add("active-filter");
+    let ticketFilter = e.target.classList[1];
+    loadSelectedTickets(ticketFilter);
 }
 
-function loadSelectedTickets(filter) {
-    if (localStorage.getItem('allTickets')) {
-        let allTickets = JSON.parse(localStorage.getItem('allTickets'));
-        let filterTickets = allTickets.filter((filterObject) => filterObject.ticketFilter === filter);
-        console.log(filterTickets);
+function loadSelectedTickets(ticketFilter) {
+    if (localStorage.getItem("allTickets")) {
+        let allTickets = JSON.parse(localStorage.getItem("allTickets"));
 
-        if (localStorage.getItem("allTickets")) {
-            ticketContainer.innerHTML = "";
-            let allTickets = JSON.parse(localStorage.getItem("allTickets"));
-            for (let i = 0; i < filterTickets.length; i++) {
-                let { ticketId, ticketFilter, ticketContent } = filterTickets[i];
+        let filteredTickets = allTickets.filter(function (filterObject) {
+            return filterObject.ticketFilter == ticketFilter;
+        });
 
-                let ticketDiv = document.createElement("div");
-                ticketDiv.classList.add("ticket");
-                // set the html of the ticket wala div !!
-                ticketDiv.innerHTML = ` <div class="ticket-filter ${ticketFilter}"></div>
-                                        <div class="ticket-id">#${ticketId}</div>
-                                        <div class="ticket-content">${ticketContent}</div>`;
+        // console.log(filteredTickets);
 
-                // append the ticket on the UI !!!!
-                ticketContainer.append(ticketDiv);
-            }
+        // empty tickets container
+        ticketContainer.innerHTML = "";
+        for (let i = 0; i < filteredTickets.length; i++) {
+            let { ticketId, ticketFilter, ticketContent } = filteredTickets[i];
+
+            let ticketDiv = document.createElement("div");
+            ticketDiv.classList.add("ticket");
+            // set the html of the ticket wala div !!
+            ticketDiv.innerHTML = ` <div class="ticket-filter ${ticketFilter}"></div>
+        <div class="ticket-id">#${ticketId}</div>
+        <div class="ticket-content">${ticketContent}</div>`;
+
+            // append the ticket on the UI !!!!
+            ticketContainer.append(ticketDiv);
         }
+
     }
 }
