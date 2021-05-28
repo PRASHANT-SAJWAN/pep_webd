@@ -24,7 +24,7 @@
 
     <script>
         let db;
-        
+
         let dbName = document.querySelector('#databse-name');
         let dbVersion = document.querySelector('#database-version');
         let openDBBtn = document.querySelector('#open-db');
@@ -34,27 +34,39 @@
         let addMediaBtn = document.querySelector('#add-media');
 
         openDBBtn.addEventListener('click', openDB);
-        // addMediaBtn.addEventListener('click', addMedia);
+        addMediaBtn.addEventListener('click', addMedia);
+
+        function addMedia() {
+            let txn = db.transaction('Media', 'readwrite');
+            let mediaStore = txn.objectStore('Media');
+
+            mediaStore.add({ mid: mid.value, type: mediaType.value });
+
+            txn.onerror = function (e) {
+                console.log('txn failed !!!\n ');
+                console.log(e);
+            }
+        }
 
         function openDB() {
             // db open // create db
-            let dbRequest = indexedDB.open('gallery', dbVersion.value);
+            let dbRequest = indexedDB.open(dbName.value, dbVersion.value);
             console.log(dbRequest);
 
-            dbRequest.onupgradeneeded = (e) => {
+            dbRequest.onupgradeneeded = function (e) {
                 alert('In upgrade event');
                 db = e.target.result;
-                let mediaTable = db.createObjectStore ('Media', {keyPath: 'mid'});
+                let mediaTable = db.createObjectStore('Media', { keyPath: 'mid' });
                 console.log(db);
             }
 
-            dbRequest.onsuccess = (e) => {
+            dbRequest.onsuccess = function (e) {
                 alert('In sucess event');
                 db = e.target.result;
                 console.log(db);
             }
 
-            dbRequest.onerror = (e) => {
+            dbRequest.onerror = function (e) {
                 alert('In Error event');
                 console.log(e);
             }
