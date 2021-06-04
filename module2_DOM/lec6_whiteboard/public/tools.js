@@ -1,27 +1,64 @@
-let pencil = document.querySelector ('#pencil');
-let eraser = document.querySelector ('#eraser');
-let undo = document.querySelector ('#undo');
-let redo = document.querySelector ('#redo');
-let sticky = document.querySelector ('#sticky');
-let photo = document.querySelector ('#photo');
-let download = document.querySelector ('#download');
+let pencil = document.querySelector("#pencil");
+let eraser = document.querySelector("#eraser");
 
-let activeTool = 'pencil';
+let pencilOptions = pencil.querySelector(".tool-options");
+let eraserOptions = eraser.querySelector(".tool-options");
 
-pencil.addEventListener ('click', ()=> {
-    if(activeTool == 'pencil') {
-        // color options of pencil open / close
-    } else {
-        activeTool = 'pencil';
-        ctx.strokeStyle = 'black';
+let pencilSizeInput = pencil.querySelector("input");
+let eraserSizeInput = eraser.querySelector("input");
+
+let pencilColors = pencil.querySelectorAll(".pencil-colors div");
+
+
+let activeTool = "pencil";
+
+let currentPencilSize = 1;
+let currentEraserSize = 1;
+let currentPencilColor = "black";
+
+for (let i = 0; i < pencilColors.length; i++) {
+    pencilColors[i].addEventListener("click", function (e) {
+        let selectedPencilColor = e.target.className;
+        ctx.strokeStyle = selectedPencilColor;
+        currentPencilColor = selectedPencilColor;
+    })
+}
+
+
+pencilSizeInput.addEventListener("change", function () {
+    let updatedPencilSize = pencilSizeInput.value;
+    ctx.lineWidth = updatedPencilSize;
+    currentPencilSize = updatedPencilSize;
+})
+
+eraserSizeInput.addEventListener("change", function () {
+    let updatedEraserSize = eraserSizeInput.value;
+    ctx.lineWidth = updatedEraserSize;
+    currentEraserSize = updatedEraserSize;
+})
+
+
+pencil.addEventListener("click", function () {
+    if (activeTool == "pencil") {
+        // pencil options open ya close honge
+        pencilOptions.classList.toggle("hide");
     }
-});
-
-eraser.addEventListener ('click', ()=> {
-    if(activeTool == 'eraser') {
-        // color options of eraser open / close
-    } else {
-        activeTool = 'eraser';
-        ctx.strokeStyle = 'white';
+    else {
+        activeTool = "pencil";
+        ctx.strokeStyle = currentPencilColor;
+        ctx.lineWidth = currentPencilSize;
+        eraserOptions.classList.add("hide");
     }
-});
+})
+eraser.addEventListener("click", function () {
+    if (activeTool == "eraser") {
+        // eraser options open ya close honge
+        eraserOptions.classList.toggle("hide");
+    }
+    else {
+        activeTool = "eraser";
+        ctx.strokeStyle = "white";
+        ctx.lineWidth = currentEraserSize;
+        pencilOptions.classList.add("hide");
+    }
+})
