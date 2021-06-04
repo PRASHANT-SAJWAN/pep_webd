@@ -36,6 +36,21 @@
         openDBBtn.addEventListener('click', openDB);
         addMediaBtn.addEventListener('click', addMedia);
 
+        function showMedia() {
+            let txn = db.transaction("Media", "readonly");
+            let mediaStore = txn.objectStore("Media");
+
+            let cursorObject = mediaStore.openCursor();
+
+            cursorObject.onsuccess = function (e) {
+                let cursor = cursorObject.result;
+                if (cursor) {
+                    console.log(cursor.value);
+                    cursor.continue();
+                }
+            }
+        }
+
         function addMedia() {
             let txn = db.transaction('Media', 'readwrite');
             let mediaStore = txn.objectStore('Media');
@@ -63,6 +78,10 @@
             dbRequest.onsuccess = function (e) {
                 alert('In sucess event');
                 db = e.target.result;
+                db.onversionchange = function(e) {
+                    alert ('');
+                    db.close();
+                }
                 console.log(db);
             }
 

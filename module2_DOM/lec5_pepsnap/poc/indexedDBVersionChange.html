@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div>
+        Database Name <input id="databse-name" type="text">
+        Version <input id="database-version" type="text">
+        <button id="open-db"> Open Database </button>
+    </div>
+
+    <script>
+        let db;
+
+        let dbName = document.querySelector('#databse-name');
+        let dbVersion = document.querySelector('#database-version');
+        let openDBBtn = document.querySelector('#open-db');
+
+        openDBBtn.addEventListener('click', function () {
+            let dbRequest = indexedDB.open(dbName.value, dbVersion.value);
+
+            dbRequest.onupgradeneeded = function (e) {
+                db = e.target.result;
+                alert('In upgrade event');
+            }
+
+            dbRequest.onsuccess = function (e) {
+                db = e.target.result;
+                alert('In sucess event');
+                db.onversionchange = function (e) {
+                    alert ('version change');
+                    db.close();
+                    console.log(e);
+                }
+            }
+
+            dbRequest.onerror = function (e) {
+                alert('In Error event');
+            }
+        });
+    </script>
+</body>
+
+</html>
