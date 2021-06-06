@@ -38,7 +38,6 @@ function redrawLine() {
                 ctx.lineTo(pointObject.x, pointObject.y);
                 ctx.stroke();
             }
-
         }
     }
 }
