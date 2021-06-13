@@ -1000,7 +1000,7 @@ document.addEventListener("DOMContentLoaded", () => {
     squares[ghost.currentIndex].classList.add(ghost.className);
     squares[ghost.currentIndex].classList.add("ghost");
   });
-  
+
   /*
   function directionHelper (ghost) {
     const directions = [-1, +1, width, -width];
@@ -1054,7 +1054,7 @@ document.addEventListener("DOMContentLoaded", () => {
       } else {
         console.log('random');
         direction = directions[Math.floor(Math.random() * directions.length)];
-    }
+      }
 
       //if the ghost is currently scared
       if (ghost.isScared) {
@@ -1122,7 +1122,7 @@ document.addEventListener("DOMContentLoaded", () => {
       document.addEventListener("keyup", setPacmanVelocity);
       movePacman();
       // move the Ghosts randomly
-      ghosts.forEach((ghost) => moveGhost(ghost));
+      // ghosts.forEach((ghost) => moveGhost(ghost));
     }
   }
 

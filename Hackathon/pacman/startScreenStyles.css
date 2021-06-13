@@ -1,0 +1,88 @@
+@font-face {
+    font-family: "PressStart2P";
+    src: url("./fonts/PressStart2P.ttf");
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+@keyframes colors {
+    0% {
+      color: blue;
+    }
+    15% {
+      color: yellow;
+    }
+    30% {
+      color: green;
+    }
+    65% {
+      color: palevioletred;
+    }
+    80% {
+      color: skyblue;
+    }
+    99% {
+      color: orange;
+    }
+}
+
+@keyframes blink {
+    0% {
+      opacity: 1;
+    }
+    60% {
+      opacity: 1;
+    }
+    61% {
+      opacity: 0;
+    }
+    99% {
+      opacity: 0;
+    }
+}
+
+body {
+    font-family: "PressStart2P", sans-serif;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#start-screen {
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    justify-content: center;
+    align-items: center;
+}
+
+#start-screen h1 {
+    font-size: 4rem;
+    margin-top: 40vh;
+    margin-bottom: 40px;
+    color: white;
+    align-items: center;
+    animation: colors 1s infinite;
+}
+
+#start-screen h2 {
+    margin-bottom: 20px;
+    color: white;
+    align-items: center;
+}
+
+#start-msg {
+    animation: blink 1s infinite;
+}
+
+a {
+    text-decoration: none;
+    color: skyblue;
+}
+
