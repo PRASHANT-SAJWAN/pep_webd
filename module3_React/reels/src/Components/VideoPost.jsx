@@ -23,11 +23,11 @@ export default function VideoPost(props) {
         let uid = props.postObj.uid;
         // users collection m => docs jiski uid={uid} h => jo post h vo user h
         let doc = await firebaseDB.collection('users').doc(props.postObj.uid).get();
-        user = doc.data();
+        let user = doc.data();
         let commentList = props.postObj.comments;
 
         let updatedCommentList = []
-        for (let i = 0; i < commentList.length(); ++i) {
+        for (let i = 0; i < commentList.length; ++i) {
             let commentObj = commentList[i];
             let doc = await firebaseDB.collection('users').doc(commentObj.uid).get();
             let commentUserPic = doc.data().profileImageUrl;

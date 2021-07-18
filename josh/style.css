@@ -1,0 +1,349 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+@media (min-width: 600px) {
+    body {
+        margin-left: 50px;
+        overflow: scroll;
+    }
+}
+
+@media (min-width: 1280px) {
+    body {
+        margin-left: 216px;
+        overflow-x: hidden;
+    }
+}
+
+button {
+    outline: none;
+    border: none;
+}
+
+.header {
+    margin-top: 41px;
+    align-items: center;
+    width: 100%;
+    height: 46px;
+    position: relative;
+    z-index: 2;
+}
+
+.icon {
+    width: 20%;
+    float: left;
+}
+
+.header .icon img.logo1 {
+    margin-top: 2px;
+    height: 39px;
+    width: 31px;
+}
+
+.header .icon img.logo2 {
+    height: 36px;
+    width: 145px;
+    margin-left: 1px;
+}
+
+.selected-link {
+    color: #FE7A3D;
+    border-bottom: 1px solid #FE7A3D;
+}
+
+.header-links {
+    flex-direction: row;
+    float: right;
+    align-items: center;
+    display: flex;
+    justify-content: space-evenly;
+    margin-right: 51px;
+    font-weight: 200;
+    width: 47%;
+}
+
+.links {
+    font-size: 16px;
+    font-weight: 400;
+    display: flex;
+    margin-bottom: 4px;
+    padding-bottom: 11px;
+    padding-top: 10px;
+}
+
+.btn {
+    background-color: #FF5300;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    color: white;
+    padding: 11px 33px;
+    border-radius: 4px;
+}
+
+.trending-blog {
+    overflow: hidden;
+}
+
+.trending-blog .left {
+    margin-top: 126px;
+    float: left;
+    width: 58%;
+}
+
+.trending-blog .title {
+    margin-top: 4px;
+    color: #FE7A3D;
+    font-weight: 500;
+    font-size: 13px;
+}
+
+.trending-blog .title span {
+    letter-spacing: 0.5px;
+    word-spacing: 4px;
+}
+
+.trending-blog .title::before {
+    /* increase seq to increase length */
+    content: '\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0';
+    text-decoration: line-through;
+    margin-right: 5px;
+}
+
+.right {
+    float: right !important;
+    position:relative;
+}
+
+.trending-blog .right {
+    float: right !important;
+    width: 100%;
+    height:auto;
+    margin-top: -1.6% !important;
+    margin-right: -59.2% !important;
+}
+
+.trending-blog .right img {
+    height: 765px;
+    z-index: 0;
+    width: 602px;
+}
+
+.trending-blog .heading {
+    font-size: 57px;
+    margin-top: 18px;
+    font-weight: 900;
+    line-height: 61px;
+    letter-spacing: -1px;
+    word-spacing: 6px;
+}
+
+.trending-blog .left p {
+    margin-top: 26px;
+    margin-bottom: 46px;
+    font-size: 17px;
+    width: 80%;
+}
+
+.latest-blogs {
+    position: relative;
+    background: white;
+    min-height: 933px;
+    padding-top: 1px;
+    margin-top: -5.8% !important;
+    margin-right: 87px !important;
+    z-index: 2;
+    border-radius: 9px;
+}
+
+.latest-blogs .blog-header {
+    display: flex;
+    margin-top: 51px;
+    margin-bottom: 48px;
+}
+
+.latest-blogs .blog-header .title {
+    font-size: 37px;
+    margin-left: 70px;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    word-spacing: 3px;
+}
+
+.latest-blogs .blog-header .btn {
+    margin-top: 6px;
+    margin-left: auto;
+    order: 2;
+    padding-bottom: 12px;
+    margin-right: 69px;
+}
+
+.latest-blogs .blogs {
+    margin-left: 102px;
+    display: flex;
+    margin-bottom: 29.5px;
+}
+
+.latest-blogs .blogs img {
+    margin-top: -8px !important;
+    margin-left: -9px !important;
+}
+
+.latest-blogs .blogs .new {}
+
+.latest-blogs .blogs .blog-content {
+    float: left;
+    width: 55%;
+    min-height: 194px;
+    margin-right: 31px;
+}
+
+.latest-blogs .blogs .title {
+    font-size: 27px;
+    letter-spacing: -0.1px;
+    margin-top: 5px;
+    font-weight: 600;
+    margin-left: 11px;
+}
+
+.latest-blogs .blogs .content{
+    font-size: 15px;
+    word-spacing: 3px;
+    letter-spacing: -0.09px;
+    margin-top: 15px;
+    margin-left: 10px;
+    line-height: 22px;
+    color: #777777;
+}
+
+.latest-blogs .blogs .btn{
+    left: -7px;
+    padding: 12px 42px;
+    margin-top: 15px;
+}
+
+.latest-blogs .blog-details {
+    width: 26.5%;
+    margin-top: 43px;
+    line-height: 31px;
+    color: #C4C4C4;
+}
+
+.center {
+    display: flex;
+    margin: 0 auto;
+    align-items: center;
+    justify-content: center;
+}
+
+.latest-blogs .white-btn {
+    margin-top: 52px;
+    border: 1px solid #FF5300;
+    background-color: white;
+    color: #FF5300;
+    width: 165px;
+    border-radius: 5px;
+    padding: 11px 0px;
+}
+
+.blog-posts {
+    margin-top: 92px;
+}
+
+.blog-posts .blog-post-header {
+    font-size: 36px;
+    font-weight: 600;
+    margin-left: 40%;
+}
+
+.blog-posts .blog-list {
+    display: flex;
+}
+
+.blog-posts .blogs {
+    margin-top: 75px;
+    width: 28%;
+    margin-right: 3.8%;
+}
+
+.blog-posts .blogs .author-details {
+    min-height: 46px;
+    border-left: 3px solid #FE5200;
+}
+
+.blog-posts .blogs .author-name{
+    margin-left: 33px;
+    font-size: 18px;
+    color: #FE5200;
+}
+
+.blog-posts .blogs .date {
+    margin-left: 5px;
+    font-size: 16px;
+    color: #ABABAB;
+}
+
+.blog-posts .blogs .location {
+    margin-left: 33px;
+    margin-top: 3px;
+    font-size: 15.5px;
+    color: #ABABAB;
+}
+
+.hide {
+    display: none;
+}
+
+.blog-posts .blog {}
+
+.blog-posts .blog .blog-header {
+    margin-left: 39px;
+    font-size: 28px;
+    margin-top: 7px;
+    line-height: 35px;
+    font-weight: 600;
+    letter-spacing: -0.6px;
+    word-spacing: 2.35px;
+    color: #222222;
+}
+
+.blog-posts .blog .blog-content {
+    margin-top: 26px;
+    margin-left: 39px;
+    line-height: 23px;
+    color: #959595;
+}
+
+.blog-posts .blog .white-btn {
+    margin-top: 27px;
+    border: 1px solid #FF5300;
+    background-color: white;
+    color: #FF5300;
+    width: 121px;
+    margin-left: 35px;
+    justify-content: center;
+    border-radius: 5px;
+    padding: 11px 0px;
+    display: flex;
+}
+
+.blog-posts .carousel {
+    margin-top: 6.6%;
+    display: flex;
+}
+
+.blog-posts .carousel .next-slider{
+    margin-left: 2.4%;
+}
+
+.blog-posts .carousel .prev-slider{
+    margin-left: 43.8%;
+}
+
+.instagram-feeds {}
+
+.new-blogs {}
