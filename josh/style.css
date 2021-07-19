@@ -19,6 +19,13 @@
     }
 }
 
+a {
+    outline: none;
+    border: none;
+    text-decoration: none;
+    color: black;
+}
+
 button {
     outline: none;
     border: none;
@@ -55,7 +62,7 @@ button {
     border-bottom: 1px solid #FE7A3D;
 }
 
-.header-links {
+.header .header-links {
     flex-direction: row;
     float: right;
     align-items: center;
@@ -64,6 +71,7 @@ button {
     margin-right: 51px;
     font-weight: 200;
     width: 47%;
+    cursor: pointer;
 }
 
 .links {
@@ -83,6 +91,7 @@ button {
     color: white;
     padding: 11px 33px;
     border-radius: 4px;
+    cursor: pointer;
 }
 
 .trending-blog {
@@ -180,6 +189,7 @@ button {
     order: 2;
     padding-bottom: 12px;
     margin-right: 69px;
+    cursor: pointer;
 }
 
 .latest-blogs .blogs {
@@ -224,6 +234,7 @@ button {
     left: -7px;
     padding: 12px 42px;
     margin-top: 15px;
+    cursor: pointer;
 }
 
 .latest-blogs .blog-details {
@@ -248,6 +259,7 @@ button {
     width: 165px;
     border-radius: 5px;
     padding: 11px 0px;
+    cursor: pointer;
 }
 
 .blog-posts {
@@ -261,13 +273,29 @@ button {
 }
 
 .blog-posts .blog-list {
-    display: flex;
+    
 }
 
-.blog-posts .blogs {
+.blog-posts .blog-list .blog-block {
+    -webkit-transition:all 1.0s ease-in-out;
+    -moz-transition:all 1.0s ease-in-out;
+    -o-transition:all 1.0s ease-in-out;
+    transition:all 1.0s ease-in-out;
+}
+
+.blog-posts .blog-list .blog-block .blogs {
     margin-top: 75px;
     width: 28%;
     margin-right: 3.8%;
+    cursor: grab;
+}
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: flex;
 }
 
 .blog-posts .blogs .author-details {
@@ -291,12 +319,9 @@ button {
     margin-left: 33px;
     margin-top: 3px;
     font-size: 15.5px;
-    color: #ABABAB;
+    color: #ABABAB; 
 }
 
-.hide {
-    display: none;
-}
 
 .blog-posts .blog {}
 
@@ -329,6 +354,7 @@ button {
     border-radius: 5px;
     padding: 11px 0px;
     display: flex;
+    cursor: pointer;
 }
 
 .blog-posts .carousel {
@@ -338,10 +364,12 @@ button {
 
 .blog-posts .carousel .next-slider{
     margin-left: 2.4%;
+    cursor: pointer;
 }
 
 .blog-posts .carousel .prev-slider{
     margin-left: 43.8%;
+    cursor: pointer;
 }
 
 .instagram-feeds {}
