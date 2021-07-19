@@ -31,6 +31,14 @@ button {
     border: none;
 }
 
+.hide {
+    display: none;
+}
+
+.show {
+    display: block;
+}
+
 .header {
     margin-top: 41px;
     align-items: center;
@@ -273,29 +281,8 @@ button {
 }
 
 .blog-posts .blog-list {
-    
-}
-
-.blog-posts .blog-list .blog-block {
-    -webkit-transition:all 1.0s ease-in-out;
-    -moz-transition:all 1.0s ease-in-out;
-    -o-transition:all 1.0s ease-in-out;
-    transition:all 1.0s ease-in-out;
-}
-
-.blog-posts .blog-list .blog-block .blogs {
-    margin-top: 75px;
-    width: 28%;
-    margin-right: 3.8%;
-    cursor: grab;
-}
-
-.hide {
-    display: none;
-}
-
-.show {
     display: flex;
+    margin-top: 75px;
 }
 
 .blog-posts .blogs .author-details {
@@ -332,7 +319,7 @@ button {
     line-height: 35px;
     font-weight: 600;
     letter-spacing: -0.6px;
-    word-spacing: 2.35px;
+    word-spacing: 0.95px;
     color: #222222;
 }
 
@@ -341,6 +328,11 @@ button {
     margin-left: 39px;
     line-height: 23px;
     color: #959595;
+}
+
+.blog-posts .blogs {
+    width: 27%;
+    margin-right: 61px;
 }
 
 .blog-posts .blog .white-btn {
@@ -362,13 +354,17 @@ button {
     display: flex;
 }
 
-.blog-posts .carousel .next-slider{
+.blog-posts .carousel {
+    display: flex;
+    justify-content: center;
+}
+
+.blog-posts .carousel .next {
     margin-left: 2.4%;
     cursor: pointer;
 }
 
-.blog-posts .carousel .prev-slider{
-    margin-left: 43.8%;
+.blog-posts .carousel .prev {
     cursor: pointer;
 }
 
