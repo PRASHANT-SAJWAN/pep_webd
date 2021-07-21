@@ -1,15 +1,5 @@
-let headerlinks = document.querySelectorAll('.header .header-links .links');
-
-for (let i = 0; i < headerlinks.length; ++i) {
-    headerlinks[i].addEventListener("click", (e) => {
-        let selectedLink = document.querySelector('.header .header-links .links.selected-link');
-        selectedLink.classList.remove('selected-link');
-        e.target.classList.add('selected-link');
-    });
-}
-
-
 let index = 0;
+let nextBlogAt = 3;
 let blogList = document.querySelector('.blog-posts .blog-list');
 let allBlogsDiv = document.querySelectorAll('.blog-posts .blog-list .blogs');
 let carouselLength = allBlogsDiv.length;
@@ -17,26 +7,25 @@ let carouselLength = allBlogsDiv.length;
 let next = document.querySelector('.blog-posts .carousel .next');
 let prev = document.querySelector('.blog-posts .carousel .prev');
 
-next.addEventListener('click', () => {
-    allBlogsDiv[index].classList.add('hide');
-    allBlogsDiv[index + 3].classList.remove('hide');
-    index++;
-    prev.classList.remove('hide');
-
-    if (index + 3 == carouselLength) {
-        next.classList.add('hide');
-    }
+window.addEventListener("resize", (e) => {
+    console.log(e.target.indexedDB.innerWidth);
 })
+
+next.addEventListener('click', () => {
+    if (index + 3 < carouselLength) {
+        allBlogsDiv[index].classList.add('hide');
+        allBlogsDiv[index + 3].classList.remove('hide');
+        index++;
+    }
+});
 
 prev.addEventListener('click', () => {
-    allBlogsDiv[index + 2].classList.add('hide');
-    allBlogsDiv[index - 1].classList.remove('hide');
-    index--;
-    next.classList.remove('hide');
-    if (index == 0) {
-        prev.classList.add('hide');
+    if (index > 0) {
+        allBlogsDiv[index + 2].classList.add('hide');
+        allBlogsDiv[index - 1].classList.remove('hide');
+        index--;
     }
-})
+});
 
 let blogBlock = document.querySelector('.blog-posts .blog-list .blogs');
 blogBlock.addEventListener("click", (e) => {
