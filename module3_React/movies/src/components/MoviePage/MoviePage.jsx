@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { Component, useState } from "react";
+import React, { Component } from "react";
 import YouTube from "react-youtube";
 import "./MoviePage.css";
 
@@ -11,6 +11,7 @@ class MoviePage extends Component {
     };
 
     async componentDidMount() {
+        console.log(this.props.location);
         // https://api.themoviedb.org/3/movie/324552/videos?api_key=bdd243ea847239dc0799805e63e189f0&language=en-US
         let response = await axios.get(
             `${API_URL}/movie/${this.props.location.state.id}/videos?api_key=${API_KEY}&language=en-US`

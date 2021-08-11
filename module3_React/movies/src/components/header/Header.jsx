@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './Header.css';
 
 class Header extends Component {
@@ -15,6 +15,7 @@ class Header extends Component {
     };
 
     handleKeyPress = (e) => {
+        console.log(this.props);
         if (e.key === "Enter") {
             this.props.setMovies(this.state.newMovieName);
         }
@@ -42,7 +43,7 @@ class Header extends Component {
                         <Link to='/'>Home</Link>
                     </div>
                     <div className="header-link">
-                        <Link to='/fav'>Favourite</Link>
+                        <Link to={{ pathname: `/fav`, favMovies: this.props.favMovies, removeFavouriteMovie: this.props.removeFavouriteMovie }} >Favourite</Link>
                     </div>
                 </div>
             </div>

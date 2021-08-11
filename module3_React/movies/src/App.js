@@ -15,10 +15,14 @@ class App extends Component {
     currentMovie: "avengers",
     pages: [],
     currPage: 1,
+    favMovies: [],
   };
 
   async componentDidMount() {
     this.setMovies(this.state.currentMovie);
+  }
+  componentDidUpdate() {
+    console.log(this.state.favMovies);
   }
 
   setMovies = async (newMovieName) => {
@@ -37,6 +41,22 @@ class App extends Component {
       pages: pages,
     });
   };
+
+  setFavouriteMovie = (movie) => {
+    let updatedFavMovies = this.state.favMovies;
+    updatedFavMovies.push(movie);
+    this.setState({
+      favMovies: updatedFavMovies,
+    });
+  }
+
+  removeFavouriteMovie = (movie) => {
+    let updatedFavMovies = this.state.favMovies.filter(movie_itr => movie.id != movie_itr.id);
+
+    this.setState({
+      favMovies: updatedFavMovies,
+    });
+  }
 
   nextPage = async () => {
     this.setPage(this.state.currPage + 1);
@@ -66,12 +86,12 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          <Header setMovies={this.setMovies} />
+          <Header setMovies={this.setMovies} favMovies={this.state.favMovies} removeFavouriteMovie={this.removeFavouriteMovie} />
 
           <Switch>
             <Route path="/" exact>
               {this.state.moviesData.length ?
-                <Movies moviesData={this.state.moviesData} /> :
+                <Movies moviesData={this.state.moviesData} setFavouriteMovie={this.setFavouriteMovie} /> :
                 <h1>No movies found</h1>}
               <Pagination
                 pages={this.state.pages}
@@ -83,7 +103,7 @@ class App extends Component {
 
             <Route path="/fav" exact component={Favourite} />
             <Route path="/moviepage" exact component={MoviePage} />
-            
+
           </Switch>
         </div>
       </Router>

@@ -22,6 +22,11 @@ class Movie extends Component {
         });
     }
 
+    handleAddToFav = () => {
+        console.log(this.props.movieObj);
+        this.props.setFavouriteMovie(this.props.movieObj);
+    }
+
     render() {
         let { title, vote_average, release_date, poster_path } = this.props.movieObj;
         let posterPath = IMAGE_URL + poster_path;
@@ -37,6 +42,7 @@ class Movie extends Component {
                     <div className="release-date">{release_date}</div>
                     <div className="movie-rating">{vote_average}</div>
                 </div>
+                <button onClick={this.handleAddToFav}>Add to FAV</button>
             </div>
         );
     }
