@@ -25,7 +25,7 @@ class Header extends Component {
         return (
             <div className="header">
                 <div className="logo">
-                    <img src="logo.svg" alt="" />
+                    <img src={process.env.PUBLIC_URL + "/logo.png"} alt="" />
                 </div>
                 <div className="search-btn">
                     <input
@@ -46,6 +46,7 @@ class Header extends Component {
                         <Link to={{ pathname: `/fav`, favMovies: this.props.favMovies, removeFavouriteMovie: this.props.removeFavouriteMovie }} >Favourite</Link>
                     </div>
                 </div>
+                <button onClick={() => { this.props.handleLogout() }}>Logout</button>
             </div>
         );
     }

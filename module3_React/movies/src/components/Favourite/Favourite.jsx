@@ -4,15 +4,23 @@ import { API_KEY, API_URL, IMAGE_URL } from '../../API/sercret';
 import axios from 'axios';
 
 class Favourite extends Component {
-    state = {};
+    state = {
+        favMovies: [],
+    };
     componentDidMount() {
-        console.log(this.props);
+        console.log(this.props.location.favMovies);
+        this.setState({ favMovies: this.props.location.favMovies });
+        console.log(this.state.favMovies.length);
+    }
+
+    componentDidUpdate () {
+        console.log('movie component updated 1');
         console.log(this.props.location.favMovies);
     }
 
     render() {
         return <div className="movies">
-            {this.props.location.favMovies ? this.props.location.favMovies.map((movieObj) => {
+            {this.props.location.favMovies.length > 0 ? this.props.location.favMovies.map((movieObj) => {
                 return <FavouriteMovies key={movieObj.id}
                     movieObj={movieObj} removeFavouriteMovie={this.props.location.removeFavouriteMovie} />
             }) : <div>No favourite Movies</div>}
@@ -22,7 +30,8 @@ class Favourite extends Component {
 
 class FavouriteMovies extends Component {
     state = {
-        detailedMovieObj: {}
+        detailedMovieObj: {},
+        deleted: false
     };
 
     async componentDidMount() {
@@ -34,14 +43,13 @@ class FavouriteMovies extends Component {
         let posterPath = IMAGE_URL + detailedMovieObj.poster_path;
         this.setState({
             detailedMovieObj: { ...detailedMovieObj, poster_path: posterPath },
+            deleted: false,
         });
     }
 
-    handleAddToFav = () => {
-        console.log(this.props.movieObj);
-        this.props.setFavouriteMovie(this.props.movieObj);
+    componentDidUpdate () {
+        console.log('movie component updated 2');
     }
-
     render() {
         let { title, vote_average, release_date, poster_path } = this.props.movieObj;
         let posterPath = IMAGE_URL + poster_path;
@@ -56,7 +64,7 @@ class FavouriteMovies extends Component {
                 <div className="release-date">{release_date}</div>
                 <div className="movie-rating">{vote_average}</div>
             </div>
-            <button onClick={() => { this.props.removeFavouriteMovie(this.props.movieObj); }}>REMOVE FROM FAVOURITE</button>
+            <button onClick={() => { this.props.removeFavouriteMovie(this.props.movieObj); this.setState({deleted: true})}}>REMOVE FROM FAVOURITE</button>
         </div>);
     }
 }

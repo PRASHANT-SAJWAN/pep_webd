@@ -7,10 +7,14 @@ import MoviePage from "./components/MoviePage/MoviePage.jsx";
 import { API_KEY, API_URL } from './API/sercret.js';
 import axios from 'axios';
 import './App.css';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import Login from './components/Login/Login.jsx';
+import { firebaseAuth } from './config';
+import SignUp from './components/SignIn/SignUp.jsx';
 
 class App extends Component {
   state = {
+    user: null,
     moviesData: [],
     currentMovie: "avengers",
     pages: [],
@@ -21,8 +25,9 @@ class App extends Component {
   async componentDidMount() {
     this.setMovies(this.state.currentMovie);
   }
+
   componentDidUpdate() {
-    console.log(this.state.favMovies);
+    console.log("user : ", this.state.user);
   }
 
   setMovies = async (newMovieName) => {
@@ -43,7 +48,7 @@ class App extends Component {
   };
 
   setFavouriteMovie = (movie) => {
-    let updatedFavMovies = this.state.favMovies;
+    let updatedFavMovies = this.state.favMovies.filter(favmovie => favmovie.id !== movie.id);
     updatedFavMovies.push(movie);
     this.setState({
       favMovies: updatedFavMovies,
@@ -52,7 +57,7 @@ class App extends Component {
 
   removeFavouriteMovie = (movie) => {
     let updatedFavMovies = this.state.favMovies.filter(movie_itr => movie.id != movie_itr.id);
-
+    console.log('delete movie ', updatedFavMovies);
     this.setState({
       favMovies: updatedFavMovies,
     });
@@ -82,14 +87,49 @@ class App extends Component {
     this.setPage(this.state.currPage - 1);
   };
 
+  register = async (email, password) => {
+    try {
+      let response = await firebaseAuth.createUserWithEmailAndPassword(email, password);
+      let uid = response.user.uid;
+      if (uid) {
+        this.setState({ ...this.state, user: response.user });
+        console.log(response.user);
+      }
+    } catch (err) {
+      console.log(err.message);
+    }
+  }
+
+  handleLogout = async () => {
+    this.setState({ ...this.state, user: null });
+    await firebaseAuth.signOut();
+  }
+
+  handleLogin = async (email, password) => {
+    console.log(email, password);
+    let response = await firebaseAuth.signInWithEmailAndPassword(email, password);
+    let uid = response.user.uid;
+    if (uid) {
+      this.setState({ ...this.state, user: response.user })
+
+    }
+  }
+
   render() {
     return (
       <Router>
         <div className="App">
-          <Header setMovies={this.setMovies} favMovies={this.state.favMovies} removeFavouriteMovie={this.removeFavouriteMovie} />
-
+          <Header setMovies={this.setMovies} favMovies={this.state.favMovies} removeFavouriteMovie={this.removeFavouriteMovie} handleLogout={this.handleLogout} />
           <Switch>
-            <Route path="/" exact>
+            <Route path="/login" exact >
+              <Login handleLogin={this.handleLogin} user={this.state.user} />
+            </Route>
+            <Route path="/signup" exact >
+              <SignUp handleSignUp={this.register} />
+            </Route>
+            <PrivateRoute path="/fav" exact component={Favourite} user={this.state.user} />
+            <PrivateRoute path="/moviepage" exact component={MoviePage} user={this.state.user} />
+            <Route path="/" exact user={this.state.user}>
               {this.state.moviesData.length ?
                 <Movies moviesData={this.state.moviesData} setFavouriteMovie={this.setFavouriteMovie} /> :
                 <h1>No movies found</h1>}
@@ -100,15 +140,18 @@ class App extends Component {
                 previousPage={this.previousPage}
                 setPage={this.setPage} />
             </Route>
-
-            <Route path="/fav" exact component={Favourite} />
-            <Route path="/moviepage" exact component={MoviePage} />
-
           </Switch>
         </div>
       </Router>
     );
   }
+}
+
+function PrivateRoute({ component: Component, user: user, ...props }) {
+  console.log(props);
+  return <Route {...props} render={(props) => {
+    return user !== null ? <Component {...props} /> : <Redirect to="/login" exact />
+  }} />
 }
 
 export default App;
