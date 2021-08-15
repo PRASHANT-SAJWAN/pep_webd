@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+// import './Login.css';
 
 class Login extends Component {
     state = {
@@ -35,7 +36,13 @@ class Login extends Component {
                 Password <input value={this.state.password} type="text" onChange={(e) => this.setPassword(e.target.value)} />
             </div>
             <br />
-            <button onClick={() => this.handleLogin(this.state.email, this.state.password)}>Login</button>
+            <button onClick={() => this.handleLogin(this.state.email, this.state.password)}>
+                <Link to='/'>Login</Link>
+            </button>
+            <br />
+            <button>
+                <Link to='/signup'>Sign Up</Link>
+            </button>
         </div>);
     };
 }

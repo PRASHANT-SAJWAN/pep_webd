@@ -9,7 +9,7 @@ import axios from 'axios';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import Login from './components/Login/Login.jsx';
-import { firebaseAuth } from './config';
+import { firebaseAuth, firebaseDB } from './config';
 import SignUp from './components/SignIn/SignUp.jsx';
 
 class App extends Component {
@@ -19,15 +19,11 @@ class App extends Component {
     currentMovie: "avengers",
     pages: [],
     currPage: 1,
-    favMovies: [],
+    favList: [],
   };
 
   async componentDidMount() {
     this.setMovies(this.state.currentMovie);
-  }
-
-  componentDidUpdate() {
-    console.log("user : ", this.state.user);
   }
 
   setMovies = async (newMovieName) => {
@@ -47,16 +43,31 @@ class App extends Component {
     });
   };
 
-  setFavouriteMovie = (movie) => {
-    let updatedFavMovies = this.state.favMovies.filter(favmovie => favmovie.id !== movie.id);
-    updatedFavMovies.push(movie);
-    this.setState({
-      favMovies: updatedFavMovies,
-    });
+  setFavouriteMovie = async (movieObj, poster_path) => {
+    if (this.state.user) {
+      let { title, vote_average, release_date, id } = movieObj;
+      let updatedList = this.state.favList;
+      for (let i = 0; i < updatedList.length; ++i) {
+        if (updatedList[i].id == movieObj.id)
+          return;
+      }
+      updatedList.push({
+        id: id,
+        title: title,
+        vote_average: vote_average,
+        release_date: release_date,
+        poster_path: poster_path
+      });
+      this.setState({
+        favList: updatedList
+      });
+      console.log({ ...this.state.user, favList: updatedList });
+      await firebaseDB.collection('users').doc(this.state.user.uid).set({ ...this.state.user, favList: updatedList });
+    }
   }
 
   removeFavouriteMovie = (movie) => {
-    let updatedFavMovies = this.state.favMovies.filter(movie_itr => movie.id != movie_itr.id);
+    let updatedFavMovies = this.state.favMovies.filter(movie_itr => movie.id !== movie_itr.id);
     console.log('delete movie ', updatedFavMovies);
     this.setState({
       favMovies: updatedFavMovies,
@@ -87,31 +98,58 @@ class App extends Component {
     this.setPage(this.state.currPage - 1);
   };
 
-  register = async (email, password) => {
+  register = async (email, password, username) => {
     try {
       let response = await firebaseAuth.createUserWithEmailAndPassword(email, password);
-      let uid = response.user.uid;
-      if (uid) {
-        this.setState({ ...this.state, user: response.user });
-        console.log(response.user);
+      let user = response.user;
+      this.setState({
+        user: {
+          uid: user.uid,
+          username: username,
+          email: user.email,
+        },
+        favList: []
+      });
+      console.log({ ...this.state.user, favList: this.state.favList });
+      await firebaseDB.collection('users').doc(user.uid).set({ ...this.state.user, favList: [] });
+      if (user) {
+        this.setState({ user: user });
       }
     } catch (err) {
-      console.log(err.message);
+      console.log('ERROR : ', err.message);
     }
   }
 
   handleLogout = async () => {
-    this.setState({ ...this.state, user: null });
+    this.setState({
+      user: null,
+      currentMovie: "avengers",
+      pages: [],
+      currPage: 1,
+      favMovies: []
+    });
+
     await firebaseAuth.signOut();
   }
 
   handleLogin = async (email, password) => {
     console.log(email, password);
     let response = await firebaseAuth.signInWithEmailAndPassword(email, password);
-    let uid = response.user.uid;
-    if (uid) {
-      this.setState({ ...this.state, user: response.user })
-
+    let ref = await firebaseDB.collection('users').doc(response.user.uid).get();
+    let user = ref.data();
+    if (user) {
+      this.setState({
+        currentMovie: "avengers",
+        pages: [],
+        currPage: 1,
+        user: {
+          uid: user.uid,
+          username: user.username,
+          email: user.email,
+        },
+        favList: user.favList
+      });
+      console.log('LOGIN : ', this.state);
     }
   }
 
@@ -119,7 +157,7 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          <Header setMovies={this.setMovies} favMovies={this.state.favMovies} removeFavouriteMovie={this.removeFavouriteMovie} handleLogout={this.handleLogout} />
+          <Header user={this.state.user} setMovies={this.setMovies} favList={this.state.favList} removeFavouriteMovie={this.removeFavouriteMovie} handleLogout={this.handleLogout} />
           <Switch>
             <Route path="/login" exact >
               <Login handleLogin={this.handleLogin} user={this.state.user} />
@@ -131,7 +169,7 @@ class App extends Component {
             <PrivateRoute path="/moviepage" exact component={MoviePage} user={this.state.user} />
             <Route path="/" exact user={this.state.user}>
               {this.state.moviesData.length ?
-                <Movies moviesData={this.state.moviesData} setFavouriteMovie={this.setFavouriteMovie} /> :
+                <Movies user={this.state.user} moviesData={this.state.moviesData} setFavouriteMovie={this.setFavouriteMovie} /> :
                 <h1>No movies found</h1>}
               <Pagination
                 pages={this.state.pages}
@@ -148,7 +186,6 @@ class App extends Component {
 }
 
 function PrivateRoute({ component: Component, user: user, ...props }) {
-  console.log(props);
   return <Route {...props} render={(props) => {
     return user !== null ? <Component {...props} /> : <Redirect to="/login" exact />
   }} />

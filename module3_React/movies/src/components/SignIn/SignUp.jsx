@@ -1,10 +1,12 @@
+import { Button, Container, TextField } from '@material-ui/core';
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom';
 
 class SignUp extends Component {
     state = {
-        email: "",
-        password: "",
-        username: "",
+        email: "ken@gmail.com",
+        password: "123456",
+        username: "ken",
     };
 
     setUsername = (username) => {
@@ -20,21 +22,34 @@ class SignUp extends Component {
     }
 
     render() {
-        return (<div>
-            <div>
-                Username <input value={this.state.username} type="text" onChange={(e) => this.setUsername(e.target.value)} />
-            </div>
+        return (<Container maxWidth="sm">
+            <TextField id="sign-in-username"
+                label="Username"
+                value={this.state.username}
+                onChange={(e) => this.setUsername(e.target.value)} />
             <br />
-            <div>
-                Email <input value={this.state.email} type="text" onChange={(e) => this.setEmail(e.target.value)} />
-            </div>
+            <TextField id="sign-in-email"
+                label="Email"
+                value={this.state.email}
+                onChange={(e) => this.setEmail(e.target.value)} />
             <br />
-            <div>
-                Password <input value={this.state.password} type="text" onChange={(e) => this.setPassword(e.target.value)} />
-            </div>
+            <TextField id="sign-in-password"
+                label="Password"
+                value={this.state.password}
+                onChange={(e) => this.setPassword(e.target.value)} />
             <br />
-            <button onClick={() => this.props.handleSignUp(this.state.email, this.state.password)}>Sign Up</button>
-        </div>);
+            <br />
+            <Button
+                variant="contained" size="small" color="primary"
+                onClick={() => this.props.handleSignUp(this.state.email, this.state.password, this.state.username)}>
+                <Link to="/" style={{ textDecoration: "none", color: "white" }}>Sign Up </Link>
+            </Button>
+            <br />
+            <br />
+            <Button variant="outlined" size="small" color="primary">
+                <Link to='/login' style={{ textDecoration: "none", color: "black" }}>Login</Link>
+            </Button>
+        </Container>);
     };
 }
 

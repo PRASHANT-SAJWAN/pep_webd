@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { API_KEY, API_URL, IMAGE_URL } from '../../API/sercret';
 import './Movie.css';
 import axios from 'axios';
+import { firebaseDB } from '../../config';
 
 
 class Movie extends Component {
@@ -22,9 +23,10 @@ class Movie extends Component {
         });
     }
 
-    handleAddToFav = () => {
+    handleAddToFav = async () => {
+        let posterPath = IMAGE_URL + this.state.detailedMovieObj.poster_path;
         console.log(this.props.movieObj);
-        this.props.setFavouriteMovie(this.props.movieObj);
+        this.props.setFavouriteMovie(this.props.movieObj, posterPath);
     }
 
     render() {

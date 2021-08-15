@@ -43,10 +43,10 @@ class Header extends Component {
                         <Link to='/'>Home</Link>
                     </div>
                     <div className="header-link">
-                        <Link to={{ pathname: `/fav`, favMovies: this.props.favMovies, removeFavouriteMovie: this.props.removeFavouriteMovie }} >Favourite</Link>
+                        <Link to={{ pathname: `/fav`, favList: this.props.favList, removeFavouriteMovie: this.props.removeFavouriteMovie }} >Favourite</Link>
                     </div>
                 </div>
-                <button onClick={() => { this.props.handleLogout() }}>Logout</button>
+                {this.props.user && <button onClick={() => { this.props.handleLogout() }}>Logout</button>}
             </div>
         );
     }
