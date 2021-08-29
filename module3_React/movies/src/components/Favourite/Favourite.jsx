@@ -8,16 +8,23 @@ class Favourite extends Component {
         favList: [],
     };
     componentDidMount() {
+        console.log('in comp did mount ', this.state);
         console.log(this.props.location.favList);
         this.setState({ favList: this.props.location.favList });
         console.log(this.state.favList.length);
     }
 
+    removeMovie = (movie) => {
+        console.log('state ', this.state);
+        let updatedList = this.state.favList.filter(data => movie.id != data.id);
+        this.setState({ favList: updatedList });
+    }
+
     render() {
         return <div className="movies">
-            {this.props.location.favList.length > 0 ? this.props.location.favList.map((movieObj) => {
+            {this.state.favList.length > 0 ? this.state.favList.map((movieObj) => {
                 return <FavouriteMovies key={movieObj.id}
-                    movieObj={movieObj} removeFavouriteMovie={this.props.location.removeFavouriteMovie} />
+                    movieObj={movieObj} removeFavouriteMovie={this.props.location.removeFavouriteMovie} removeMovie={this.removeMovie} />
             }) : <div>No favourite Movies</div>}
         </div>
     }
@@ -60,7 +67,7 @@ class FavouriteMovies extends Component {
                 <div className="release-date">{release_date}</div>
                 <div className="movie-rating">{vote_average}</div>
             </div>
-            <button onClick={() => { this.props.removeFavouriteMovie(this.props.movieObj); this.setState({ deleted: true }) }}>REMOVE FROM FAVOURITE</button>
+            <button onClick={() => { this.props.removeMovie(this.props.movieObj); this.props.removeFavouriteMovie(this.props.movieObj); this.setState({ deleted: true }) }}>REMOVE FROM FAVOURITE</button>
         </div>);
     }
 }

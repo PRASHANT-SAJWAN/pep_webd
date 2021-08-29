@@ -31,7 +31,7 @@ class App extends Component {
       params: { api_key: API_KEY, page: 1, query: newMovieName },
     });
     let moviesData = data.data.results.slice(0, 10);
-    let pagesCount = data.data.total_pages; //3
+    let pagesCount = data.data.total_pages; 
     let pages = [];
     for (let i = 1; i <= pagesCount; i++) {
       pages.push(i);
@@ -66,12 +66,14 @@ class App extends Component {
     }
   }
 
-  removeFavouriteMovie = (movie) => {
-    let updatedFavMovies = this.state.favMovies.filter(movie_itr => movie.id !== movie_itr.id);
+  removeFavouriteMovie = async (movie) => {
+    console.log(this.state.favList);
+    let updatedFavMovies = this.state.favList.filter(movie_itr => movie.id !== movie_itr.id);
     console.log('delete movie ', updatedFavMovies);
     this.setState({
-      favMovies: updatedFavMovies,
+      favList: updatedFavMovies,
     });
+    await firebaseDB.collection('users').doc(this.state.user.uid).set({ ...this.state.user, favList: updatedFavMovies });
   }
 
   nextPage = async () => {
@@ -126,7 +128,7 @@ class App extends Component {
       currentMovie: "avengers",
       pages: [],
       currPage: 1,
-      favMovies: []
+      favList: []
     });
 
     await firebaseAuth.signOut();
