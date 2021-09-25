@@ -23,49 +23,112 @@ userRouter.route('/:id')
     .get(getUserById);
 
 authRouter
-    .post("/signup", signupUser)
+    .post("/signup", setCreatedAt, signupUser)
     .post("/login", loginUser);
 // database 
-let user = [];
-function signupUser(req, res) {
-    //email,user name ,password
-    let { email, password, name } = req.body;
-    console.log("user", req.body);
-    user.push({
-        email, name, password
-    })
-    res.status(200).json({
-        message: "user created",
-        createdUser: req.body
-    })
+
+const userModel = require('./models/userModel');
+
+function setCreatedAt(req, res, next) {
+    let body = req.body;
+    let length = Object.keys(body).length;
+    if (length == 0) {
+        return res.status(400).json({
+            message: "can't create user when body i empty "
+        })
+    }
+    req.body.createdAt = new Date().toISOString();
+    next();
 }
+
+async function signupUser(req, res) {
+    // email, user name, password
+    try {
+        let userObj = req.body;
+        console.log("user", req.body);
+        let user = await userModel.create(userObj);   // put in database
+        console.log(user);
+
+        res.status(200).json({
+            message: "user created",
+            createdUser: req.body
+        })
+    } catch (err) {
+        res.status(500).json({
+            message: err.message
+        })
+    }
+}
+
 function createUser(req, res) {
     console.log("req.data", req.body);
     user = req.body;
     res.status(200).send("data recieved and user added ");
 }
-function getUser(req, res) {
-    console.log("users")
-    res.json(user);
-    // for sending key value pair
-}
-function updateUser(req, res) {
-    let obj = req.body;
-    for (let key in obj) {
-        user[key] = obj[key];
+
+async function getUser(req, res) {
+    try {
+        let users = await userModel.find();
+        res.status(200).json({
+            'message': 'list of all the users',
+            users: users
+        });
+    } catch (err) {
+        res.status(500).json({
+            error: err.message,
+            "message": "can't get users"
+        })
     }
-    res.status(200).json(user);
-}
-function deleteUser(req, res) {
-    user = {}
-    res.status(200).json(user);
-}
-function getUserById(req, res) {
-    console.log(req.params);
-    res.status(200).send("Hello");
 }
 
-function loginUser(req, res) {
+async function updateUser(req, res) {
+    try {
+        let userObj = req.body;
+        let user = await userModel.updateOne(id, userObj);   // put in database
+        console.log(user);
+
+        res.status(200).json({
+            message: "user updated",
+            createdUser: user
+        })
+    } catch (err) {
+        res.status(500).json({
+            error: err.message,
+            "message": "can't update users"
+        })
+    }
+}
+
+async function deleteUser(req, res) {
+    try {
+        let id = req.body.id;
+        await userModel.deleteOne (id);
+        res.status(200).json(user);
+    } catch (err) {
+        res.status(500).json({
+            error: err.message,
+            "message": "can't delete users"
+        })
+    }
+}
+
+async function getUserById(req, res) {
+    try {
+        let userObj = req.body;
+        let users = await userModel.findById({name: userObj.name});
+        res.status(200).json({
+            'message': 'list of all the users',
+            users: users
+        });
+    } catch (err) {
+        res.status(500).json({
+            error: err.message,
+            "message": "can't get users by ID"
+        })
+    }
+}
+
+async function loginUser(req, res) {
 
 }
 
