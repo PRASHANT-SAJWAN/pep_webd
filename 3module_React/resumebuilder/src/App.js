@@ -19,7 +19,7 @@ function App() {
     <div>
       <Header></Header>
       <Switch>
-        <PrivateRoute path="/education" component={Education}></PrivateRoute>
+        <PrivateRoute pat nent={Education}></PrivateRoute>
         <PrivateRoute path="/contact" component={Contacts}></PrivateRoute>
         <PrivateRoute path="/getting-started" component={GettingStarted}></PrivateRoute>
         <PrivateRoute path="/resume-templates" component={GettingStarted}></PrivateRoute>
